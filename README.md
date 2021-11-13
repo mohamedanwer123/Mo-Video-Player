@@ -1,8 +1,7 @@
 
 
-<video width="360" autoplay >
-  <source src="https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4" type="video/mp4">
-</video>
+## Mo-Video-Player Demo
+https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4
 
 
 ## Install
