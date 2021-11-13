@@ -45,4 +45,3 @@ poster                | strings  | Yes      | ''                        | poster
 style                 | object   | Yes      | {alignSelf:'center', height:200, width:330,} | style of video
 showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | yes                        | show increase and decrease 10 seconds buttons 
 
-**MIT Licensed**
