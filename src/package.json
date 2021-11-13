@@ -1,6 +1,6 @@
 {
   "name": "mo-video-player",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MoVideoPlayer is react native custom video player with many options",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/engmohamedanwer321/mo-video-player.git"
+    "url": "git+https://github.com/mohamedanwer123/Mo-Video-Player.git"
   },
   "keywords": [
     "video",
@@ -24,9 +24,9 @@
   "author": "Mohamed Anwer",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/engmohamedanwer321/mo-video-player/issues"
+    "url": "https://github.com/mohamedanwer123/Mo-Video-Player/issues"
   },
-  "homepage": "https://gitlab.com/engmohamedanwer321/mo-video-player#readme",
+  "homepage": "https://github.com/mohamedanwer123/Mo-Video-Player.git#readme",
   "devDependencies": {
     "metro-react-native-babel-preset": "^0.66.2"
   },

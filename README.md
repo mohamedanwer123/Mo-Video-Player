@@ -1,10 +1,8 @@
 
 
-<img src="https://i.ibb.co/txyZtYV/image1.jpg" width="360">
-<img src="https://i.ibb.co/gv1cZWT/image3.jpg" width="360">
-<br/>
-<img src="https://i.ibb.co/6tQ6GVY/image4.jpg" width="360">
-<img src="https://i.ibb.co/LP4Nkyz/image5.jpg" width="360">
+<video width="360" autoplay >
+  <source src="https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4" type="video/mp4">
+</video>
 
 
 ## Install
