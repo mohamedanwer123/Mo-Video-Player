@@ -20,6 +20,7 @@ const MoVideoPlayer = (props) => {
   const [isShowVideoPlaylist, setIsShowVideoPlaylist] = useState(false)
   const [isVideoFullScreen, setIsVideoFullScreen] = useState(false)
   const [isErrorInLoadVideo, setIsVErrorInLoadVideo] = useState(false)
+  const [isVideoEnd, setIsVideoEnd] = useState(false)
   const [videoDuration, setVideoDuration] = useState(0)
   const [videoQuality, setVideoQuality] = useState(480)
   const [videoSound, setVideoSound] = useState(1.0)
@@ -119,7 +120,16 @@ const MoVideoPlayer = (props) => {
   const videoFooter = () => (
     <View style={{paddingHorizontal:10, width:videoStyle.width, height:35, position:'absolute', bottom:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.5)', flexDirection:'row', alignItems:'center', justifyContent:'space-between', zIndex:100000,}} >
         <TouchableOpacity
-        onPress={()=>setIsPaused(!isPaused)}
+        onPress={()=>{
+          if(isVideoEnd){
+            videoRef.current.seek(0)
+            setIsVideoEnd(false)
+            setCurrentVideoDuration(0)
+            setIsPaused(false)
+          }else{
+            setIsPaused(!isPaused)
+          }
+        }}
         >
           <Image source={isPaused?require('./images/play.png'):require('./images/pause.png')} style={{width:17, height:17,}} />
         </TouchableOpacity>
@@ -497,9 +507,9 @@ const MoVideoPlayer = (props) => {
           data={playList}
           renderItem={({item, index})=>(
             <TouchableOpacity 
-            style={{borderRadius:5,borderWidth:2, borderColor:'white', marginRight:10,justifyContent:'center', alignItems:'center', width:130, height:120,}}
+            style={{marginRight:10,justifyContent:'center', alignItems:'center', width:130, height:120,}}
             >
-              <Image source={{uri: item.poster}} resizeMode='stretch' style={{position:'absolute', top:0, left:0, width:125, height:115, borderRadius:5, }} />
+              <Image source={{uri: item.poster}} resizeMode='stretch' style={{position:'absolute', top:0, left:0, width:130, height:120, borderRadius:5, borderWidth:2, borderColor:'white', }} />
               <View style={{width:40, height:40, borderRadius:20, backgroundColor:'#900C3F',justifyContent:'center', alignItems:'center', zIndex:10000 }} >
                 <Image source={require('./images/play.png')} style={{width:17, height:17,}} />
               </View>
@@ -523,6 +533,7 @@ const MoVideoPlayer = (props) => {
        <View style={videoStyle} >
         <Video 
           style={{flex:1}}
+          //repeat={true}
           posterResizeMode='cover'
           resizeMode='cover'
           bufferConfig={{
@@ -545,7 +556,7 @@ const MoVideoPlayer = (props) => {
             setIsVErrorInLoadVideo(false)
           }}
           onProgress={videoData=>setCurrentVideoDuration(videoData.currentTime)}
-          onSeek={()=>{
+          /*onSeek={()=>{
             if(Platform.OS=='android'){
               setIsVideoSeeked(true)
             }
@@ -554,9 +565,12 @@ const MoVideoPlayer = (props) => {
             console.log("onReadyForDisplay")
             setIsVideoSeeked(false)
             setIsVErrorInLoadVideo(false)
-          }}
+          }}*/
           onError={(videoData)=>setIsVErrorInLoadVideo(true)}
           onEnd={()=>{
+            console.log("on end")
+            setIsVideoEnd(true)
+            setIsPaused(true)
             if(playList.length>0){
               setIsShowVideoPlaylist(true)
             }

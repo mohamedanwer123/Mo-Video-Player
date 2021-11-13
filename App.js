@@ -15,13 +15,13 @@ const App = () => {
          title='MO-VIDEO-PLAYER'
          playList={[
            {
-             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-             poster: 'https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg',
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
+             poster: 'https://www.carage.net/media/halfhd/carage_fahrzeuge_square_8.jpg',
              title:'Video 1'
            },
            {
-             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-             poster: 'https://images.ctfassets.net/hrltx12pl8hq/3MbF54EhWUhsXunc5Keueb/60774fbbff86e6bf6776f1e17a8016b4/04-nature_721703848.jpg?fit=fill&w=480&h=270',
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+             poster: 'https://carsguide-res.cloudinary.com/image/upload/f_auto%2Cfl_lossy%2Cq_auto%2Ct_default/v1/editorial/story/hero_image/1908-Ford-Model-T_0.jpg',
              title:'Video 2'
            },
            {
