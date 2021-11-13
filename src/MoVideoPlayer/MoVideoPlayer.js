@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {View,Text,TouchableOpacity,ActivityIndicator, TouchableWithoutFeedback, Platform, ViewPropTypes, Dimensions, StatusBar, BackHandler, Image} from 'react-native';
+import {View,Text,TouchableOpacity,ActivityIndicator, TouchableWithoutFeedback, Platform, ViewPropTypes, Dimensions, StatusBar, BackHandler, Image, FlatList} from 'react-native';
 import Video from 'react-native-video';
 import Slider from "react-native-sliders";
 import Orientation from 'react-native-orientation-locker';
@@ -17,6 +17,7 @@ const MoVideoPlayer = (props) => {
   const [isShowVideoRateSettings, setIsShowVideoRateSettings] = useState(false)
   const [isShowVideoQualitiesSettings, setIsShowVideoQualitiesSettings] = useState(false)
   const [isShowVideoSoundSettings, setIsShowVideoSoundSettings] = useState(false)
+  const [isShowVideoPlaylist, setIsShowVideoPlaylist] = useState(false)
   const [isVideoFullScreen, setIsVideoFullScreen] = useState(false)
   const [isErrorInLoadVideo, setIsVErrorInLoadVideo] = useState(false)
   const [videoDuration, setVideoDuration] = useState(0)
@@ -26,7 +27,7 @@ const MoVideoPlayer = (props) => {
   const [videoRate, setVideoRate] = useState(1)
   const [dimension, setDimension] = useState(Dimensions.get('window'))
 
-  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title=''} = props
+  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList} = props
   
   const portraitStyle = {alignSelf:'center', height:200, width:330, ...style}
   const landScapeStyle = {alignSelf:'center', height:dimension.height, width:dimension.width}
@@ -59,9 +60,10 @@ const MoVideoPlayer = (props) => {
     }
   },[isVideoFullScreen])
 
+  
   const videoHeaders = () => (
     <View style={{paddingHorizontal:10,width:videoStyle.width, height:35, position:'absolute', top:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.5)', flexDirection:'row', alignItems:'center', justifyContent:'space-between', zIndex:100000,}} >
-      <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-100,}}>{title}</Text>
+      <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-140, }}>{title}</Text>
       <View style={{flexDirection:'row-reverse',alignItems:'center',justifyContent:'space-between'}} >
         <TouchableOpacity
         onPress={()=>{
@@ -75,6 +77,16 @@ const MoVideoPlayer = (props) => {
         }}
         >
           <Image source={isVideoFullScreen?require('./images/exitFullScreen.png'):require('./images/fullScreen.png')} style={{width:18, height:18,}} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        style={{marginRight:10}}
+        onPress={()=>{
+          setIsShowVideoPlaylist(true)
+          setIsVideoFocused(false)
+        }}
+        >
+          <Image source={require('./images/playlist.png')} style={{width:18, height:18, marginTop:5 }} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -458,6 +470,45 @@ const MoVideoPlayer = (props) => {
     />
   )
 
+  const videoPlaylistView = () => (
+    <TouchableWithoutFeedback>
+
+    <View style={{position:'absolute', bottom:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.9)', alignItems:'center', justifyContent:'center', zIndex:100000, ...videoStyle}} >
+     
+      <TouchableOpacity
+        style={{justifyContent:'center',alignItems:'center', position:'absolute', right:10, top:10}}
+        onPress={()=>{
+          setIsShowVideoPlaylist(false)
+          setIsVideoFocused(true)
+        }}
+      >
+        <Image source={require('./images/close.png')} style={{width:20, height:22,}} />
+      </TouchableOpacity>
+
+  
+      <View
+       style={{marginVertical:5, height:120, marginHorizontal:20,}}
+      >
+        <FlatList 
+          horizontal
+          data={playList}
+          renderItem={({item, index})=>(
+            <TouchableOpacity 
+            style={{marginRight:10,justifyContent:'center', alignItems:'center'}}
+            >
+              <Image source={{uri: item.poster}} resizeMode='stretch' style={{width:130, height:120, borderRadius:5}} />
+              <View style={{width:40, height:40, borderRadius:20, backgroundColor:'#900C3F', position:'absolute', top:40, justifyContent:'center', alignItems:'center' }} >
+                <Image source={require('./images/play.png')} style={{width:17, height:17,}} />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      
+    </View>
+  </TouchableWithoutFeedback>
+  )
+
 
 
   return (
@@ -515,6 +566,7 @@ const MoVideoPlayer = (props) => {
           {isShowVideoQualitiesSettings&&videoQualitiesSettingView()}
           {isVideoSeeked&&videoSeekedLoader()}
           {isErrorInLoadVideo&&videoErrorView()}
+          {isShowVideoPlaylist&&videoPlaylistView()}
       </View>
     </TouchableWithoutFeedback>
   );
