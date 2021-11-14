@@ -26,13 +26,14 @@ const MoVideoPlayer = (props) => {
   const [videoSound, setVideoSound] = useState(1.0)
   const [currentVideoDuration, setCurrentVideoDuration] = useState(0)
   const [videoRate, setVideoRate] = useState(1)
+  const [playlistSelectedVideo, setPlaylistSelectedVideo] = useState(null)
   const [dimension, setDimension] = useState(Dimensions.get('window'))
 
   const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList=[]} = props
-  
   const portraitStyle = {alignSelf:'center', height:200, width:330, ...style}
   const landScapeStyle = {alignSelf:'center', height:dimension.height, width:dimension.width}
   const videoStyle = isVideoFullScreen?landScapeStyle:portraitStyle
+
 
   useEffect(()=>{
     const dimensionSubscriber = Dimensions.addEventListener('change',({window, screen})=>{
@@ -482,7 +483,9 @@ const MoVideoPlayer = (props) => {
     />
   )
 
-  const videoPlaylistView = () => (
+  const videoPlaylistView = () => {
+    console.log("INDEX OF LIST  ",(playlistSelectedVideo&&playlistSelectedVideo.index>0)?playlistSelectedVideo.index-1:0)
+    return(
     <TouchableWithoutFeedback>
 
     <View style={{position:'absolute', bottom:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.9)', alignItems:'center', justifyContent:'center', zIndex:100000, ...videoStyle}} >
@@ -499,28 +502,46 @@ const MoVideoPlayer = (props) => {
 
   
       <View
-       style={{marginVertical:5, height:120, marginHorizontal:20,}}
+       style={{marginVertical:5, height:playlistSelectedVideo?140:120, marginHorizontal:20,}}
       >
         <FlatList 
           horizontal
           showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{alignItems:'center'}}
+          initialScrollIndex={(playlistSelectedVideo&&playlistSelectedVideo.index>0)?playlistSelectedVideo.index-1:0}
+          keyExtractor={(item, index)=>index}
           data={playList}
-          renderItem={({item, index})=>(
-            <TouchableOpacity 
-            style={{marginRight:10,justifyContent:'center', alignItems:'center', width:130, height:120,}}
-            >
-              <Image source={{uri: item.poster}} resizeMode='stretch' style={{position:'absolute', top:0, left:0, width:130, height:120, borderRadius:5, borderWidth:2, borderColor:'white', }} />
-              <View style={{width:40, height:40, borderRadius:20, backgroundColor:'#900C3F',justifyContent:'center', alignItems:'center', zIndex:10000 }} >
-                <Image source={require('./images/play.png')} style={{width:17, height:17,}} />
-              </View>
-            </TouchableOpacity>
-          )}
+          renderItem={({item, index})=>{
+            const isSelected = playlistSelectedVideo?playlistSelectedVideo.url==item.url?true:false:false
+            return(
+              <TouchableOpacity 
+              style={{marginRight:10,justifyContent:'center', alignItems:'center', width:isSelected?150:130, height:isSelected?140:120,}}
+              onPress={()=>{
+                if(isSelected){
+                  setIsPaused(!isPaused)
+                  setIsShowVideoPlaylist(false)
+                }else{
+                  videoRef.current.seek(0)
+                  setPlaylistSelectedVideo({...item, index:index})
+                  setIsPaused(false)
+                  setIsShowVideoPlaylist(false)
+                }
+              }}
+              >
+                <Image source={{uri: item.poster}} resizeMode='stretch' style={{position:'absolute', top:0, left:0, width:isSelected?150:130, height:isSelected?140:120, borderRadius:5, borderWidth:2, borderColor:'white', }} />
+                <View style={{width:40, height:40, borderRadius:20, backgroundColor:'#900C3F',justifyContent:'center', alignItems:'center', zIndex:10000 }} >
+                  <Image source={isSelected?isPaused?require('./images/play.png'):require('./images/pause.png'):require('./images/play.png')} style={{width:17, height:17,}} />
+                </View>
+              </TouchableOpacity>
+            )
+          }}
         />
       </View>
       
     </View>
   </TouchableWithoutFeedback>
-  )
+    )
+  }
 
 
   return (
@@ -542,7 +563,7 @@ const MoVideoPlayer = (props) => {
             bufferForPlaybackAfterRebufferMs: 1000*60,
           }}
           ref={videoRef}
-          source={source}
+          source={playlistSelectedVideo?{uri:playlistSelectedVideo.url}:source}
           paused={isPaused}
           muted={isMuted}
           rate={videoRate}
@@ -571,6 +592,7 @@ const MoVideoPlayer = (props) => {
             console.log("on end")
             setIsVideoEnd(true)
             setIsPaused(true)
+            //setPlaylistSelectedVideo(null)
             if(playList.length>0){
               setIsShowVideoPlaylist(true)
             }
