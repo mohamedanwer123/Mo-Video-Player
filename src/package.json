@@ -1,6 +1,6 @@
 {
-  "name": "react-native-mo-video-player",
-  "version": "1.0.4",
+  "name": "mo-video-player",
+  "version": "1.0.5",
   "description": "MoVideoPlayer is react native custom video player with many options",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,16 @@
   "keywords": [
     "video",
     "video-player",
-    "react native",
+    "react-native-video-player",
+    "video player",
+    "react native video player",
+    "react native mo video player",
+    "react-native-mo-video-player",
+    "react native mo",
+    "react-native-mo",
+    "react native video",
+    "react-native-video",
+    "react-native",
     "mobile",
     "ui",
     "ios",

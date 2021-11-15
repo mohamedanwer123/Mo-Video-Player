@@ -27,7 +27,7 @@ https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.
 ## Install
 
 ```shell
-npm i --save react-native-mo-video-player
+npm i --save mo-video-player
 npm i --save react-native-orientation-locker
 npm i --save react-native-sliders
 npm i --save react-native-video
