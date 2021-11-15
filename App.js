@@ -13,6 +13,7 @@ const App = () => {
          source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
          poster='https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg'
          title='MO-VIDEO-PLAYER'
+         autoPlay
          playList={[
            {
              url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',

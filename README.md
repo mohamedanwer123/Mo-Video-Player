@@ -18,6 +18,7 @@ Mo-Video-Player is react native video player which support many features and wor
 7- Poster <br/>
 8- Title <br/>
 9- Seek +10 , -10 seconds <br/>
+10- AutoPlay<br/>
 
 ## Demo
 https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4
@@ -89,11 +90,12 @@ const App = () => {
 Prop                  | Type     | Optional | Default                   | Description
 --------------------- | -------- | -------- | ------------------------- | -----------
 title                 | strings  | Yes      | ''                        | title of video
-source                | object   | false    | null                      | source of video ex: source={{uri:'video-url'}}
+source                | object   | No       | null                      | source of video ex: source={{uri:'video-url'}}
 poster                | strings  | Yes      | ''                        | video poster uri
 style                 | object   | Yes      | {alignSelf:'center', height:200, width:330,} | style of video
-showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | yes                        | show increase and decrease 10 seconds buttons 
-playlist              | array of bojects   | Yes | []      | add playlist to video 
+showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | true                        | show increase and decrease 10 seconds buttons 
+playlist              | array of bojects    | Yes | []      | add playlist to video 
+autoPlay              | boolean  | Yes      | false |make vide autoPlay
 
 
 

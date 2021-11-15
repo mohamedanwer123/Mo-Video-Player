@@ -7,8 +7,10 @@ import Orientation from 'react-native-orientation-locker';
 
 const MoVideoPlayer = (props) => {
 
+  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList=[], autoPlay=false} = props
+
   const videoRef = useRef(null)
-  const [isPaused, setIsPaused] = useState(true)
+  const [isPaused, setIsPaused] = useState(!autoPlay)
   const [isMuted, setIsMuted] = useState(false)
   const [isVideoSeeked, setIsVideoSeeked] = useState(false)
   const [isVideoFocused, setIsVideoFocused] = useState(true)
@@ -29,7 +31,6 @@ const MoVideoPlayer = (props) => {
   const [playlistSelectedVideo, setPlaylistSelectedVideo] = useState(null)
   const [dimension, setDimension] = useState(Dimensions.get('window'))
 
-  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList=[]} = props
   const portraitStyle = {alignSelf:'center', height:200, width:330, ...style}
   const landScapeStyle = {alignSelf:'center', height:dimension.height, width:dimension.width}
   const videoStyle = isVideoFullScreen?landScapeStyle:portraitStyle
