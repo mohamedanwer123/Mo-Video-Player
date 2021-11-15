@@ -1,15 +1,26 @@
 
-
-
+## Mo-Video-Player
 [![npm version](http://img.shields.io/npm/v/mo-video-player.svg?style=flat-square)](https://npmjs.org/package/mo-video-player "View this project on npm")
 [![npm downloads](http://img.shields.io/npm/dm/mo-video-player.svg?style=flat-square)](https://npmjs.org/package/mo-video-player "View this project on npm")
 [![npm licence](http://img.shields.io/npm/l/mo-video-player.svg?style=flat-square)](https://npmjs.org/package/mo-video-player "View this project on npm")
 [![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-989898.svg?style=flat-square)](https://npmjs.org/package/react-native-sliders "View this project on npm")
 
+Mo-Video-Player is react native video player which support many features and work at android & ios
 
-## Mo-Video-Player Demo
+
+## Features
+1- Playback speed <br/>
+2- Full screen (landsacpe mode) <br/>
+3- Sound volume <br/>
+4- Playlist <br/>
+5- Qulaity <br/>
+6- Mute <br/>
+7- Poster <br/>
+8- Title <br/>
+9- Seek +10 , -10 seconds <br/>
+
+## Demo
 https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4
-
 
 
 ## Install
@@ -35,6 +46,38 @@ const App = () => {
          source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
          poster='https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg'
          title='React Native MO-VIDEO-PLAYER'
+         playList={[
+           {
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
+             poster: 'https://www.carage.net/media/halfhd/carage_fahrzeuge_square_8.jpg',
+             title:'Video 1'
+           },
+           {
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+             poster: 'https://carsguide-res.cloudinary.com/image/upload/f_auto%2Cfl_lossy%2Cq_auto%2Ct_default/v1/editorial/story/hero_image/1908-Ford-Model-T_0.jpg',
+             title:'Video 2'
+           },
+           {
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+             poster: 'https://merriam-webster.com/assets/mw/images/article/art-wap-article-main/surfing-dog-photo-is-funner-or-funnest-a-real-word-5670-6d512231d0a52079b0c9fbf474f9a6c9@1x.jpg',
+             title:'Video 3'
+           },
+           {
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+             poster: 'https://wikiimg.tojsiabtv.com/wikipedia/en/6/6f/War_official_poster.jpg',
+             title:'Video 4'
+           },
+           {
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+             poster: 'https://www.alsharqtoday.com/wp-content/uploads/2020/09/%D8%A7%D9%84%D8%AC%D9%84%D9%8A%D8%AF.jpg',
+             title:'Video 5'
+           },
+           {
+             url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+             poster: 'https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg',
+             title:'Video 6'
+           },
+         ]}
        />
     </View>
   );
@@ -47,7 +90,10 @@ Prop                  | Type     | Optional | Default                   | Descri
 --------------------- | -------- | -------- | ------------------------- | -----------
 title                 | strings  | Yes      | ''                        | title of video
 source                | object   | false    | null                      | source of video ex: source={{uri:'video-url'}}
-poster                | strings  | Yes      | ''                        | poster of video 
+poster                | strings  | Yes      | ''                        | video poster uri
 style                 | object   | Yes      | {alignSelf:'center', height:200, width:330,} | style of video
 showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | yes                        | show increase and decrease 10 seconds buttons 
+playlist              | array of bojects   | Yes | []      | add playlist to video 
+
+
 
