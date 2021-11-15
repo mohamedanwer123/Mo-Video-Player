@@ -1,5 +1,5 @@
 {
-  "name": "mo-video-player",
+  "name": "react-native-mo-video-player",
   "version": "1.0.4",
   "description": "MoVideoPlayer is react native custom video player with many options",
   "main": "index.js",
