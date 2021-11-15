@@ -65,7 +65,7 @@ const MoVideoPlayer = (props) => {
   
   const videoHeaders = () => (
     <View style={{paddingHorizontal:10,width:videoStyle.width, height:35, position:'absolute', top:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.5)', flexDirection:'row', alignItems:'center', justifyContent:'space-between', zIndex:100000,}} >
-      <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-140, }}>{title}</Text>
+      <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-140, }}>{playlistSelectedVideo?playlistSelectedVideo.title?playlistSelectedVideo.title:'':title}</Text>
       <View style={{flexDirection:'row-reverse',alignItems:'center',justifyContent:'space-between'}} >
         <TouchableOpacity
         onPress={()=>{
@@ -478,7 +478,7 @@ const MoVideoPlayer = (props) => {
 
   const videoPosterView = () => (
     <Image 
-    source={{uri: poster}} 
+    source={{uri:playlistSelectedVideo?playlistSelectedVideo.poster?playlistSelectedVideo.poster:'':poster}} 
     style={{height:videoStyle.height, width:videoStyle.width,position:'absolute',top:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.5)',}} 
     />
   )
@@ -525,6 +525,7 @@ const MoVideoPlayer = (props) => {
                   setPlaylistSelectedVideo({...item, index:index})
                   setIsPaused(false)
                   setIsShowVideoPlaylist(false)
+                  setIsVideoFocused(true)
                 }
               }}
               >
