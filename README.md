@@ -1,5 +1,11 @@
 
 
+[![npm version](http://img.shields.io/npm/v/mo-video-player.svg?style=flat-square)](https://npmjs.org/package/mo-video-player "View this project on npm")
+[![npm downloads](http://img.shields.io/npm/dm/mo-video-player.svg?style=flat-square)](https://npmjs.org/package/mo-video-player "View this project on npm")
+[![npm licence](http://img.shields.io/npm/l/mo-video-player.svg?style=flat-square)](https://npmjs.org/package/mo-video-player "View this project on npm")
+[![Platform](https://img.shields.io/badge/platform-ios%20%7C%20android-989898.svg?style=flat-square)](https://npmjs.org/package/react-native-sliders "View this project on npm")
+
+
 ## Mo-Video-Player Demo
 https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4
 
