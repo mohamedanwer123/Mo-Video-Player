@@ -7,7 +7,10 @@ import Orientation from 'react-native-orientation-locker';
 
 const MoVideoPlayer = (props) => {
 
-  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList=[], autoPlay=false, playInBackground=false} = props
+  const {
+    style={}, source, poster, title='', playList=[], autoPlay=false, playInBackground=false, 
+    showSeekingIncreaseAndDecreaseSecondsButton=true, showHeader=true, showCoverButton=true, showFullScreenButton=true , showSettingButton=true, showMuteButton=true
+  } = props
 
   const videoRef = useRef(null)
   const [isPaused, setIsPaused] = useState(!autoPlay)
@@ -80,6 +83,8 @@ const MoVideoPlayer = (props) => {
     <View style={{paddingHorizontal:10,width:videoStyle.width, height:35, position:'absolute', top:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.5)', flexDirection:'row', alignItems:'center', justifyContent:'space-between', zIndex:100000,}} >
       <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-170,}}>{playlistSelectedVideo?playlistSelectedVideo.title?playlistSelectedVideo.title:'':title}</Text>
       <View style={{flexDirection:'row-reverse',alignItems:'center',justifyContent:'space-between'}} >
+        
+        {showFullScreenButton&&
         <TouchableOpacity
         onPress={()=>{
           if(isVideoFullScreen){
@@ -93,6 +98,7 @@ const MoVideoPlayer = (props) => {
         >
           <Image source={isVideoFullScreen?require('./images/exitFullScreen.png'):require('./images/fullScreen.png')} style={{width:18, height:18,}} />
         </TouchableOpacity>
+        }
 
         {playList.length>0&&
         <TouchableOpacity
@@ -106,6 +112,7 @@ const MoVideoPlayer = (props) => {
         </TouchableOpacity>
         }
 
+        {showSettingButton&&
         <TouchableOpacity
         style={{marginRight:10}}
         onPress={()=>{
@@ -115,7 +122,9 @@ const MoVideoPlayer = (props) => {
         >
           <Image source={require('./images/settings.png')} style={{width:18, height:18,}} />
         </TouchableOpacity>
+        }
 
+        {showMuteButton&&
         <TouchableOpacity
         onPress={()=>{
           setIsMuted(!isMuted)
@@ -127,7 +136,9 @@ const MoVideoPlayer = (props) => {
         >
           <Image source={isMuted?require('./images/muteSound.png'):require('./images/fullSound.png')} style={{width:20, height:20,}} />
         </TouchableOpacity>
+        }
 
+        {showCoverButton&&
         <TouchableOpacity
         onPress={()=>{
           setIsVideoCovered(true)
@@ -137,6 +148,7 @@ const MoVideoPlayer = (props) => {
         >
           <Image source={require('./images/eye.png')} style={{width:20, height:20,}} />
         </TouchableOpacity>
+        }
       </View>
     </View>
   )
@@ -579,7 +591,7 @@ const MoVideoPlayer = (props) => {
           />
 
           <TouchableOpacity
-          style={{width:80, height:35, justifyContent:'center', alignItems:'center', backgroundColor:'rgba(0 ,0, 0,0.5)', marginTop:20, borderRadius:5}}
+          style={{width:80, height:30, justifyContent:'center', alignItems:'center', backgroundColor:'rgba(0 ,0, 0,0.5)', marginTop:20, borderRadius:5}}
           onPress={()=>{
             setIsVideoFocused(true)
             setIsVideoCovered(false)
@@ -648,7 +660,7 @@ const MoVideoPlayer = (props) => {
           }}
           />
           {(currentVideoDuration==0&&poster)&&videoPosterView()}
-          {isVideoFocused&&videoHeaders()}   
+          {(isVideoFocused&&showHeader)&&videoHeaders()}   
           {(isVideoFocused&&showSeekingIncreaseAndDecreaseSecondsButton&&!isErrorInLoadVideo)&&videoSeekingIncreaseButton()}
           {(isVideoFocused&&showSeekingIncreaseAndDecreaseSecondsButton&&!isErrorInLoadVideo)&&videoSeekingDecreaseButton()}
           {isVideoFocused&&videoFooter()}   
