@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {View,Text,TouchableOpacity,ActivityIndicator, TouchableWithoutFeedback, Platform, ViewPropTypes,AppState, Dimensions, StatusBar, BackHandler, Image, FlatList} from 'react-native';
+import {View,Text,TouchableOpacity,ActivityIndicator, TouchableWithoutFeedback, Platform, ViewPropTypes,AppState, Dimensions, StatusBar, BackHandler, Image, FlatList, ImageBackground} from 'react-native';
 import Video from 'react-native-video';
 import Slider from "react-native-sliders";
 import Orientation from 'react-native-orientation-locker';
@@ -23,6 +23,7 @@ const MoVideoPlayer = (props) => {
   const [isVideoFullScreen, setIsVideoFullScreen] = useState(false)
   const [isErrorInLoadVideo, setIsVErrorInLoadVideo] = useState(false)
   const [isVideoEnd, setIsVideoEnd] = useState(false)
+  const [isVideoCovered, setIsVideoCovered] = useState(false)
   const [videoDuration, setVideoDuration] = useState(0)
   const [videoQuality, setVideoQuality] = useState(480)
   const [videoSound, setVideoSound] = useState(1.0)
@@ -77,7 +78,7 @@ const MoVideoPlayer = (props) => {
   
   const videoHeaders = () => (
     <View style={{paddingHorizontal:10,width:videoStyle.width, height:35, position:'absolute', top:0, left:0, backgroundColor:'rgba(0 ,0, 0,0.5)', flexDirection:'row', alignItems:'center', justifyContent:'space-between', zIndex:100000,}} >
-      <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-140, }}>{playlistSelectedVideo?playlistSelectedVideo.title?playlistSelectedVideo.title:'':title}</Text>
+      <Text numberOfLines={1} style={{color:'white', fontSize:12,width:videoStyle.width-170,}}>{playlistSelectedVideo?playlistSelectedVideo.title?playlistSelectedVideo.title:'':title}</Text>
       <View style={{flexDirection:'row-reverse',alignItems:'center',justifyContent:'space-between'}} >
         <TouchableOpacity
         onPress={()=>{
@@ -125,6 +126,16 @@ const MoVideoPlayer = (props) => {
         style={{marginRight:10}}
         >
           <Image source={isMuted?require('./images/muteSound.png'):require('./images/fullSound.png')} style={{width:20, height:20,}} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        onPress={()=>{
+          setIsVideoCovered(true)
+          setIsVideoFocused(false)
+        }}
+        style={{marginRight:10}}
+        >
+          <Image source={require('./images/eye.png')} style={{width:20, height:20,}} />
         </TouchableOpacity>
       </View>
     </View>
@@ -556,6 +567,32 @@ const MoVideoPlayer = (props) => {
     )
   }
 
+  const videoCoverView = () => (
+    <TouchableWithoutFeedback>
+      <ImageBackground 
+      style={{position:'absolute', bottom:0, left:0, alignItems:'center', justifyContent:'center', zIndex:100000, ...videoStyle}}
+      source={require('./images/blur.png')}
+      >
+         <Image 
+          source={require('./images/eye.png')} 
+          style={{height:70, width:100,}} 
+          />
+
+          <TouchableOpacity
+          style={{width:80, height:35, justifyContent:'center', alignItems:'center', backgroundColor:'rgba(0 ,0, 0,0.5)', marginTop:20, borderRadius:5}}
+          onPress={()=>{
+            setIsVideoFocused(true)
+            setIsVideoCovered(false)
+          }}
+          >
+            <Text style={{color:'white'}} >Uncover</Text>
+          </TouchableOpacity>
+
+      </ImageBackground>
+    </TouchableWithoutFeedback>
+    )
+  
+
 
   return (
     <TouchableWithoutFeedback
@@ -567,7 +604,6 @@ const MoVideoPlayer = (props) => {
        <View style={videoStyle} >
         <Video 
           style={{flex:1}}
-          playInBackground={playInBackground}
           posterResizeMode='cover'
           resizeMode='cover'
           bufferConfig={{
@@ -585,6 +621,7 @@ const MoVideoPlayer = (props) => {
             value: videoQuality
           }}
           volume={videoSound}
+          playInBackground={playInBackground}
           onLoad={videoData=>{
             setVideoDuration(videoData.duration)
             setIsVErrorInLoadVideo(false)
@@ -622,6 +659,7 @@ const MoVideoPlayer = (props) => {
           {isVideoSeeked&&videoSeekedLoader()}
           {isErrorInLoadVideo&&videoErrorView()}
           {(playList.length>0&&isShowVideoPlaylist)&&videoPlaylistView()}
+          {isVideoCovered&&videoCoverView()}
       </View>
     </TouchableWithoutFeedback>
   );
