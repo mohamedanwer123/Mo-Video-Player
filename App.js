@@ -14,6 +14,7 @@ const App = () => {
          poster='https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg'
          title='MO-VIDEO-PLAYER'
          autoPlay={false}
+         playInBackground={false}
          playList={[
            {
              url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',

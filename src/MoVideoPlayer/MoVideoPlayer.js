@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {View,Text,TouchableOpacity,ActivityIndicator, TouchableWithoutFeedback, Platform, ViewPropTypes, Dimensions, StatusBar, BackHandler, Image, FlatList} from 'react-native';
+import {View,Text,TouchableOpacity,ActivityIndicator, TouchableWithoutFeedback, Platform, ViewPropTypes,AppState, Dimensions, StatusBar, BackHandler, Image, FlatList} from 'react-native';
 import Video from 'react-native-video';
 import Slider from "react-native-sliders";
 import Orientation from 'react-native-orientation-locker';
@@ -7,7 +7,7 @@ import Orientation from 'react-native-orientation-locker';
 
 const MoVideoPlayer = (props) => {
 
-  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList=[], autoPlay=false} = props
+  const {style={}, showSeekingIncreaseAndDecreaseSecondsButton=true, source, poster, title='', playList=[], autoPlay=false, playInBackground=false} = props
 
   const videoRef = useRef(null)
   const [isPaused, setIsPaused] = useState(!autoPlay)
@@ -38,30 +38,41 @@ const MoVideoPlayer = (props) => {
 
   useEffect(()=>{
     const dimensionSubscriber = Dimensions.addEventListener('change',({window, screen})=>{
-      console.log('CHANGE DIMENSION WINDOW AND SCREEN ', window)
       setDimension(window)
       setIsVideoFullScreen(window.width>window.height?true:false)
     })
 
     const backHandlerSubscriber = BackHandler.addEventListener('hardwareBackPress',()=>{
-      console.log('BACK BUTTON HANDLER')
-      console.log('BACK BUTTON HANDLER isVideoFullScreen',isVideoFullScreen)
       if(isVideoFullScreen){
-        console.log('IN IF')
         Orientation.lockToPortrait()
         StatusBar.setHidden(false)
         return true
       }else{
-        console.log('IN FALSE')
         return false
       }
     })
+
 
     return () => {
       dimensionSubscriber.remove()
       backHandlerSubscriber.remove()
     }
   },[isVideoFullScreen])
+
+  useEffect(()=>{
+    const appStateSubscriber = AppState.addEventListener('change',(state)=>{
+      console.log("APP STATE CHANGE IS ", state)
+      if(playInBackground && isPaused==false){
+        setIsPaused(false)
+      }else{
+        setIsPaused(true)
+      }
+    })
+
+    return () => {
+      appStateSubscriber.remove()
+    }
+  },[isPaused])
 
   
   const videoHeaders = () => (
@@ -556,7 +567,7 @@ const MoVideoPlayer = (props) => {
        <View style={videoStyle} >
         <Video 
           style={{flex:1}}
-          //repeat={true}
+          playInBackground={playInBackground}
           posterResizeMode='cover'
           resizeMode='cover'
           bufferConfig={{
@@ -594,7 +605,6 @@ const MoVideoPlayer = (props) => {
             console.log("on end")
             setIsVideoEnd(true)
             setIsPaused(true)
-            //setPlaylistSelectedVideo(null)
             if(playList.length>0){
               setIsShowVideoPlaylist(true)
             }
