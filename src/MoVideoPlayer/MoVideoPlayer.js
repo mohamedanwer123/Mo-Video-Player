@@ -9,7 +9,7 @@ const MoVideoPlayer = (props) => {
 
   const {
     style={}, source, poster, title='', playList=[], autoPlay=false, playInBackground=false, 
-    showSeekingIncreaseAndDecreaseSecondsButton=true, showHeader=true, showCoverButton=true, showFullScreenButton=true , showSettingButton=true, showMuteButton=true
+    showSeeking10SecondsButton=true, showHeader=true, showCoverButton=true, showFullScreenButton=true , showSettingButton=true, showMuteButton=true
   } = props
 
   const videoRef = useRef(null)
@@ -661,8 +661,8 @@ const MoVideoPlayer = (props) => {
           />
           {(currentVideoDuration==0&&poster)&&videoPosterView()}
           {(isVideoFocused&&showHeader)&&videoHeaders()}   
-          {(isVideoFocused&&showSeekingIncreaseAndDecreaseSecondsButton&&!isErrorInLoadVideo)&&videoSeekingIncreaseButton()}
-          {(isVideoFocused&&showSeekingIncreaseAndDecreaseSecondsButton&&!isErrorInLoadVideo)&&videoSeekingDecreaseButton()}
+          {(isVideoFocused&&showSeeking10SecondsButton&&!isErrorInLoadVideo)&&videoSeekingIncreaseButton()}
+          {(isVideoFocused&&showSeeking10SecondsButton&&!isErrorInLoadVideo)&&videoSeekingDecreaseButton()}
           {isVideoFocused&&videoFooter()}   
           {isShowSettingsBottomSheet&&videoSettingsView()}
           {isShowVideoRateSettings&&videoRateSettingView()}

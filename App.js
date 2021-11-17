@@ -13,7 +13,7 @@ const App = () => {
          poster='https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg'
          title='MO-VIDEO-PLAYER'
          autoPlay={false}
-         playInBackground={false}
+         playInBackground={true}
          playList={[
            {
              url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
@@ -47,7 +47,7 @@ const App = () => {
            },
          ]}
          showHeader={true}
-         showSeekingIncreaseAndDecreaseSecondsButton={true}
+         showSeeking10SecondsButton={true}
          showCoverButton={true}
          showFullScreenButton={true}
          showSettingButton={true}

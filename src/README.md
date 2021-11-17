@@ -81,7 +81,7 @@ const App = () => {
            },
          ]}
          showHeader={true}
-         showSeekingIncreaseAndDecreaseSecondsButton={true}
+         showSeeking10SecondsButton={true}
          showCoverButton={true}
          showFullScreenButton={true}
          showSettingButton={true}
@@ -99,7 +99,7 @@ title                 | strings  | Yes      | ''                        | title 
 source                | object   | No       | null                      | source of video ex: source={{uri:'video-url'}}
 poster                | strings  | Yes      | ''                        | video poster uri
 style                 | object   | Yes      | {alignSelf:'center', height:200, width:330,} | style of video
-playlist              | array of bojects    | Yes | []      | add playlist to video 
+playlist              | array of bojects    | Yes | []                  | add playlist to video 
 autoPlay              | boolean  | Yes      | false                     | make vide autoPlay
 playInBackground      | boolean  | Yes      | false                     | make vide play when app in background
 showHeader            | boolean  | Yes      | true                      | show video header 
@@ -107,7 +107,7 @@ showCoverButton       | boolean  | Yes      | true                      | show c
 showFullScreenButton  | boolean  | Yes      | true                      | show full screen button in video header
 showSettingButton     | boolean  | Yes      | true                      | show setting button to update video settings like speed, sound volume and quality 
 showMuteButton        | boolean  | Yes      | true                      | show mute button to mute video sound 
-showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | true                        | show increase and decrease 10 seconds buttons 
+showSeeking10SecondsButton | boolean  | Yes | true                      | show increase and decrease 10 seconds buttons 
 
 
 
