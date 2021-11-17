@@ -9,20 +9,11 @@ const App = () => {
     <View style={{flex:1, backgroundColor:'white', backgroundColor:'white'}} >
        <MoVideoPlayer 
          style={{width:dimension.width, height:250, marginTop:Platform.OS=='ios'?50:0,}}
-         
          source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
          poster='https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg'
          title='MO-VIDEO-PLAYER'
          autoPlay={false}
          playInBackground={false}
-
-         showHeader={true}
-         showSeekingIncreaseAndDecreaseSecondsButton={true}
-         showCoverButton={true}
-         showFullScreenButton={true}
-         showSettingButton={true}
-         showMuteButton={true}
-
          playList={[
            {
              url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4',
@@ -55,6 +46,12 @@ const App = () => {
              title:'Video 6'
            },
          ]}
+         showHeader={true}
+         showSeekingIncreaseAndDecreaseSecondsButton={true}
+         showCoverButton={true}
+         showFullScreenButton={true}
+         showSettingButton={true}
+         showMuteButton={true}
        />
       
     </View>

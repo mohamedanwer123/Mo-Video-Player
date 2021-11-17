@@ -13,20 +13,20 @@ Mo-Video-Player is react native video player which support many features and wor
 2- Full screen (landsacpe mode) <br/>
 3- Sound volume <br/>
 4- Playlist <br/>
-5- Qulaity <br/>
+5- Quality <br/>
 6- Mute <br/>
 7- Poster <br/>
 8- Title <br/>
 9- Seek +10 , -10 seconds <br/>
 10- AutoPlay <br/>
 11- Play in background <br/>
+12- Video covering <br/>
 
 ## Demo
 https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4
 
 
 ## Install
-
 ```shell
 npm i --save mo-video-player
 npm i --save react-native-orientation-locker
@@ -35,7 +35,6 @@ npm i --save react-native-video
 ```
 
 ## Usage
-
 ```jsx
 import MoVideoPlayer from 'mo-video-player';
 
@@ -44,7 +43,6 @@ const App = () => {
     <View style={{flex:1,}} >
        <MoVideoPlayer 
          style={{width:dimension.width, height:250, marginTop:Platform.OS=='ios'?30:0,}}
-         showSeekingIncreaseAndDecreaseSecondsButton={true}
          source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
          poster='https://pbs.twimg.com/media/FDX7UCbVcAUcNXj.jpg'
          title='React Native MO-VIDEO-PLAYER'
@@ -82,6 +80,12 @@ const App = () => {
              title:'Video 6'
            },
          ]}
+         showHeader={true}
+         showSeekingIncreaseAndDecreaseSecondsButton={true}
+         showCoverButton={true}
+         showFullScreenButton={true}
+         showSettingButton={true}
+         showMuteButton={true}
        />
     </View>
   );
@@ -89,17 +93,21 @@ const App = () => {
 ```
 
 ## Props
-
 Prop                  | Type     | Optional | Default                   | Description
 --------------------- | -------- | -------- | ------------------------- | -----------
 title                 | strings  | Yes      | ''                        | title of video
 source                | object   | No       | null                      | source of video ex: source={{uri:'video-url'}}
 poster                | strings  | Yes      | ''                        | video poster uri
 style                 | object   | Yes      | {alignSelf:'center', height:200, width:330,} | style of video
-showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | true                        | show increase and decrease 10 seconds buttons 
 playlist              | array of bojects    | Yes | []      | add playlist to video 
-autoPlay              | boolean  | Yes      | false |make vide autoPlay
-playInBackground      | boolean  | Yes      | false |make vide play when app in background
+autoPlay              | boolean  | Yes      | false                     | make vide autoPlay
+playInBackground      | boolean  | Yes      | false                     | make vide play when app in background
+showHeader            | boolean  | Yes      | true                      | show video header 
+showCoverButton       | boolean  | Yes      | true                      | show cover on video frame to hide video picture  
+showFullScreenButton  | boolean  | Yes      | true                      | show full screen button in video header
+showSettingButton     | boolean  | Yes      | true                      | show setting button to update video settings like speed, sound volume and quality 
+showMuteButton        | boolean  | Yes      | true                      | show mute button to mute video sound 
+showSeekingIncreaseAndDecreaseSecondsButton | boolean  | Yes      | true                        | show increase and decrease 10 seconds buttons 
 
 
 
