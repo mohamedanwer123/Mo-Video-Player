@@ -23,8 +23,7 @@ Mo-Video-Player is react native video player which support many features and wor
 12- Video covering <br/>
 
 ## Demo
-https://res.cloudinary.com/usefmahmud/video/upload/v1636730246/mo-player/video1.mp4
-
+https://res.cloudinary.com/usefmahmud/video/upload/v1637157676/mo-player/video2.mp4
 
 ## Install
 ```shell
