@@ -25,10 +25,9 @@ Mo-Video-Player is react native video player which support many features and wor
 ## Demo
 https://res.cloudinary.com/usefmahmud/video/upload/v1637157676/mo-player/video2.mp4
 
-
 ## Install
 ```shell
-npm i --save mo-video-player
+npm i --save react-native-mo-video-player
 npm i --save react-native-orientation-locker
 npm i --save react-native-sliders
 npm i --save react-native-video
@@ -36,7 +35,7 @@ npm i --save react-native-video
 
 ## Usage
 ```jsx
-import MoVideoPlayer from 'mo-video-player';
+import MoVideoPlayer from 'react-native-mo-video-player';
 
 const App = () => {
   return (
